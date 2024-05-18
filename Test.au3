@@ -11,7 +11,7 @@
 #include <AutoItConstants.au3>
 #include <File.au3>
 
-Opt("WinTitleMatchMode",2)
+Opt("WinTitleMatchMode", 2)
 
 StatusMessagePayload()
 
@@ -20,7 +20,7 @@ Func StatusMessagePayload()
 	;Check Status of Discord Process
 	If ProcessExists("Discord.exe") then 
 		;Set prority level to high
-		ProcessSetPriority("Discord.exe",4)
+		ProcessSetPriority("Discord.exe", 4)
 			
 		;Check if browser discord window is open and titled "Discord"
 		if WinExists("• Discord") Then 
