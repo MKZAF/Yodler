@@ -25,45 +25,48 @@ Func YodleMakerTool()
 	;MsgBox($MB_SYSTEMMODAL, "Duc", $YStrLst)
 	;Split $YStringList to individual strings based on how many files were found in the $YDucDir
 	Local $YStrPth = StringSplit($YStrLst,"|")
-	;MsgBox($MB_SYSTEMMODAL, "Duc", $YStrPth[0])
+	MsgBox($MB_SYSTEMMODAL, "Duc", $YStrPth[0] & "$" & $YStrPth[1] & "$" & $YStrPth[2] & "$" & $YStrPth[3])
 
 	;While Yodle String not located in YodleDuc Folder
 	While $YStrFnd = 0
 
 		;Set $Y var to current yodle sent
-		Local $Y = "test"
+		Local $Y = "te"
 		;Create "yodle".txt to use while doing StringCompare
 		Local $Ytxt = $Y & ".txt"
 
 			;Loop through the array returned by StringSplit to determine if new duc file is required to be made
 			For $YFlCnt = 1 to $YAryLst[0]
+				MsgBox($MB_SYSTEMMODAL, $YAryLst[0], $YFlCnt)
 
 				;Search $YStrPthChk for $Ytxt
-				Local $YStrPthChk = StringInStr($YStrPth[$YFlCnt], $Y, $STR_CASESENSE, -1)
+				Local $YStrPthChk = StringInStr($YStrPth[$YFlCnt], $Y)
 				MsgBox($MB_SYSTEMMODAL, "Duc", $YStrPthChk)
-
 
 					;If $YStrPthChk returns no relation between strings
 					If $YStrPthChk = 32 Then ;Split $YStrPth to individual directories
 						Local $YStrPthIso = StringSplit($YStrPth[$YFlCnt], "\")
+						MsgBox($MB_SYSTEMMODAL, "Duc", $YStrPthIso[7])
 						;Compare $Y.txt to $YStrPthIso[duc file name]
 						Local $YStrCmp = StringCompare($Ytxt, $YStrPthIso[7], $STR_CASESENSE)
-						;MsgBox($MB_SYSTEMMODAL, "", _
-                ;"Comparing '" & $Ytxt & "' To '" & $YStrPthIso[7] & "'" & @CRLF & _
-                ;"StringCompare Result (mode $STR_NOCASESENSE): " & $YStrCmp)
+						MsgBox($MB_SYSTEMMODAL, "", _
+                "Comparing '" & $Ytxt & "' To '" & $YStrPthIso[7] & "'" & @CRLF & _
+                "StringCompare Result (mode $STR_NOCASESENSE): " & $YStrCmp)
 
-							;If StringCompare returns equal value
-							If $YStrCmp = 0 Then ;Set $YStrFnd var to found
-								Local $YStrFnd = 1
-								MsgBox($MB_SYSTEMMODAL, "String Search", "string found")
+						;If StringCompare returns equal value
+						If $YStrCmp = 0 Then ;Set $YStrFnd var to found
+						Local $YStrFnd = 1
+						MsgBox($MB_SYSTEMMODAL, "String Search", "string found")
+							
+						EndIf
 
-								ElseIf $YFlCnt = $YAryLst[0] Then ;Set Duc search variable to complete And Yodle string var to needed
+					EndIf
+
+					If $YFlCnt = $YAryLst[0] Then ;Set Duc search variable to complete And Yodle string var to needed
 						Local $DucSrch = 1
 						MsgBox($MB_SYSTEMMODAL, "Duc", "Search finished")
 						Local $YStrFnd = 2
 						MsgBox($MB_SYSTEMMODAL, "New", "New Duc file needed")
-
-							EndIf
 
 					EndIf
 
