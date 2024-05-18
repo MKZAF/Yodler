@@ -25,13 +25,13 @@ Func YodleMakerTool()
 	;MsgBox($MB_SYSTEMMODAL, "Duc", $YStrLst)
 	;Split $YStringList to individual strings based on how many files were found in the $YDucDir
 	Local $YStrPth = StringSplit($YStrLst,"|")
-	MsgBox($MB_SYSTEMMODAL, "Duc", $YStrPth[0] & "$" & $YStrPth[1] & "$" & $YStrPth[2] & "$" & $YStrPth[3])
+	;MsgBox($MB_SYSTEMMODAL, "Duc", $YStrPth[0] & "$" & $YStrPth[1] & "$" & $YStrPth[2] & "$" & $YStrPth[3])
 
 	;While Yodle String not located in YodleDuc Folder
 	While $YStrFnd = 0
 
 		;Set $Y var to current yodle sent
-		Local $Y = "te"
+		Local $Y = "maybe"
 		;Create "yodle".txt to use while doing StringCompare
 		Local $Ytxt = $Y & ".txt"
 
@@ -39,7 +39,7 @@ Func YodleMakerTool()
 			For $YFlCnt = 1 to $YAryLst[0]
 				MsgBox($MB_SYSTEMMODAL, $YAryLst[0], $YFlCnt)
 
-				;Search $YStrPthChk for $Ytxt
+				;Search $YStrPthChk for $Y
 				Local $YStrPthChk = StringInStr($YStrPth[$YFlCnt], $Y)
 				MsgBox($MB_SYSTEMMODAL, "Duc", $YStrPthChk)
 
@@ -50,13 +50,14 @@ Func YodleMakerTool()
 						;Compare $Y.txt to $YStrPthIso[duc file name]
 						Local $YStrCmp = StringCompare($Ytxt, $YStrPthIso[7], $STR_CASESENSE)
 						MsgBox($MB_SYSTEMMODAL, "", _
-                "Comparing '" & $Ytxt & "' To '" & $YStrPthIso[7] & "'" & @CRLF & _
-                "StringCompare Result (mode $STR_NOCASESENSE): " & $YStrCmp)
+                				"Comparing '" & $Ytxt & "' To '" & $YStrPthIso[7] & "'" & @CRLF & _
+                				"StringCompare Result: " & $YStrCmp)
 
 						;If StringCompare returns equal value
 						If $YStrCmp = 0 Then ;Set $YStrFnd var to found
 						Local $YStrFnd = 1
-						MsgBox($MB_SYSTEMMODAL, "String Search", "string found")
+						MsgBox($MB_SYSTEMMODAL, "String Search", "string found " & $YStrFnd)
+						ExitLoop
 							
 						EndIf
 
@@ -79,12 +80,13 @@ Func YodleMakerTool()
 		Local $YPth = FileOpen(@ScriptDir & "\Ducs\" & $Y &  ".txt", 1)
 		MsgBox($MB_SYSTEMMODAL, "Yodle Path:", @ScriptDir & "\Ducs\" & $Y &  ".txt")
 
-		FileWrite($YPth, "REM DOCUMENTATION" & @CRLF)
-        FileWrite($YPth, "REM Yodler"& @CRLF)
-        FileWrite($YPth, "REM Version 1.0"& @CRLF)
-        FileWrite($YPth, "REM OS: Windows"& @CRLF)
-		FileWrite($YPth, "REM Author: Batsu"& @CRLF)
-		FileWrite($YPth, "REM Description: Payload that will run AutoIt Yodle script")
+		FileWrite($YPth, "REM DOCUMENTATION" & @CRLF & _
+		"REM Yodler" & @CRLF & _
+		"REM Version 1.0" & @CRLF & _
+		"REM OS: Windows" & @CRLF & _
+		"REM Author: Batsu" & @CRLF & _
+		"REM Description: Payload that will run AutoIt Yodle script")
+
 	EndIf
 
 EndFunc 
