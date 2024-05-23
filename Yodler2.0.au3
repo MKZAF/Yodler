@@ -19,12 +19,22 @@ StatusMessagePayload()
 
 Func StatusMessagePayload()
 
+	;If sending new yodle set to 1 and edit yodle variable $Y manually
+	Local $SndMde = 1
+
+	If $SndMde = 0 Then
 	;Find line count of YodleTempFile.txt
 	Local $LnCnt = _FileCountLines(@ScriptDir & "\Ducs\YodleTempFile.txt")
 	;MsgBox($MB_SYSTEMMODAL, "Line Count:", $LnCnt)
 	;Read $LnCnt data and set as yodle variable
 	Local $Y = FileReadLine(@ScriptDir & "\Ducs\YodleTempFile.txt", $LnCnt)
 	;MsgBox($MB_SYSTEMMODAL, "Yodle:", $Y)
+	
+		ElseIf $SndMde = 1 Then
+			;Enter Yodle to be sent here
+			Local $Y = "u ha"
+
+	EndIf
 
 	;Check Status of Discord Process
 	If ProcessExists("Discord.exe") then 
@@ -172,8 +182,8 @@ Opt("MouseCoordMode", 1)
 						;Compare $Y.txt to $YStrPthIso[duc file name]
 						Local $YStrCmp = StringCompare($Ytxt, $YStrPthIso[7], $STR_CASESENSE)
 						;MsgBox($MB_SYSTEMMODAL, "", _
-                				;"Comparing '" & $Ytxt & "' To '" & $YStrPthIso[7] & "'" & @CRLF & _
-                				;"StringCompare Result: " & $YStrCmp)
+                		;"Comparing '" & $Ytxt & "' To '" & $YStrPthIso[7] & "'" & @CRLF & _
+                		;"StringCompare Result: " & $YStrCmp)
 						;If StringCompare returns equal value
 						If $YStrCmp = 0 Then ;Set $YStrFnd var to found
 						Local $YStrFnd = 1
@@ -216,6 +226,11 @@ Opt("MouseCoordMode", 1)
 		"DELAY 100" & @CRLF & _
 		"ENTER" & @CRLF & _
 		"DELAY 750" & @CRLF & _
+		@CRLF & _
+		"REM NOTICE: Add yodle being delivered to Duck\TempFile.txt" & @CRLF & _
+		@CRLF & _
+		"STRING Add-Content -Path 'C:\User\oveng\DEV\Yodler\Ducs\YodleTempFile.txt' -Value" & ' "' & $Y & '"' & @CRLF & _
+		"ENTER" & @CRLF & _
 		@CRLF & _
 		"REM NOTICE: May need to change file path to your browser location" & @CRLF & _
 		@CRLF & _
