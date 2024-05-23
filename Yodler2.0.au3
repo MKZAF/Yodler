@@ -20,7 +20,7 @@ StatusMessagePayload()
 Func StatusMessagePayload()
 
 	;If sending new yodle set to 1 and edit yodle variable $Y manually
-	Local $SndMde = 1
+	Local $SndMde = 0
 
 	If $SndMde = 0 Then
 	;Find line count of YodleTempFile.txt
@@ -32,7 +32,7 @@ Func StatusMessagePayload()
 	
 		ElseIf $SndMde = 1 Then
 			;Enter Yodle to be sent here
-			Local $Y = "u ha"
+			Local $Y = ""
 
 	EndIf
 
